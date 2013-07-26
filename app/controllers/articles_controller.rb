@@ -17,7 +17,6 @@ class ArticlesController < ApplicationController
       # @articles = Article.where("name @@ :q or content @@ :q", :q => "%#{search_query}%")
       #solr way1:
       search = Article.search{fulltext(search_query)}
-      binding.pry
       @articles = search.results
     end
 
