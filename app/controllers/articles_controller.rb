@@ -16,7 +16,12 @@ class ArticlesController < ApplicationController
       #third way:
       # @articles = Article.where("name @@ :q or content @@ :q", :q => "%#{search_query}%")
       #solr way1:
-      search = Article.search{fulltext(search_query)}
+      # search = Article.search{fulltext(search_query)}
+      # solr way2 (doesn't work here):
+      search = Article.search do
+        fulltext search_query
+        with :author_id, params[:author_id]
+      end
       @articles = search.results
     end
 
