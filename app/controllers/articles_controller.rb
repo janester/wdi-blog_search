@@ -14,7 +14,11 @@ class ArticlesController < ApplicationController
       #sumeet's second new way:
       # @articles = Article.where("name ilike :q or content ilike :q", :q => "%#{search_query}%")
       #third way:
-      @articles = Article.where("name @@ :q or content @@ :q", :q => "%#{search_query}%")
+      # @articles = Article.where("name @@ :q or content @@ :q", :q => "%#{search_query}%")
+      #solr way1:
+      search = Article.search{fulltext(search_query)}
+      binding.pry
+      @articles = search.results
     end
 
     respond_to do |format|
