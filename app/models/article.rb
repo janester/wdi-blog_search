@@ -7,8 +7,11 @@ class Article < ActiveRecord::Base
     text :name, :boost => 5
     text :content
 
+    #pass in a block because comments column doesnt exist
     text :comments do
       comments.map {|c| c.content}
+      #an array of the conent from the comments associated with this instance of article
+      #["blah blah blah", "blah blah blah", "blah blah blah"]
     end
 
     text :author do
