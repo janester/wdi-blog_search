@@ -7,10 +7,14 @@ class ArticlesController < ApplicationController
     if search_query.blank?
       @articles = Article.all
     else
-      #sumeet's old way
+      #sumeet's old way:
       # @articles = Article.where(:name => search_query)
-      #sumeet's new way
-      @articles = Article.where("name ilike :q", :q => "%#{search_query}%")
+      #sumeet's new way:
+      # @articles = Article.where("name ilike :q", :q => "%#{search_query}%")
+      #sumeet's second new way:
+      # @articles = Article.where("name ilike :q or content ilike :q", :q => "%#{search_query}%")
+      #third way:
+      @articles = Article.where("name @@ :q or content @@ :q", :q => "%#{search_query}%")
     end
 
     respond_to do |format|
