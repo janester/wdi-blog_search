@@ -13,6 +13,7 @@ gem 'better_errors'
 gem 'binding_of_caller'
 gem 'meta_request'
 
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -46,8 +47,8 @@ gem 'unicorn'
 
 gem 'quiet_assets'
 
-# gem 'sunspot_rails'
+gem 'sunspot_rails'
 
-# group :development do
-#   gem 'sunspot_solr'
-# end
+group :development do
+  gem 'sunspot_solr'
+end
